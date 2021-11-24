@@ -28,13 +28,13 @@ public class PaymentDTO {
     String debtorAccount;
     @Positive
     BigDecimal paymentAmount;
-    @DateFormatted(pattern = "yyyyMMdd", message = "Date was not passed correctly")
+    @DateFormatted(pattern = "yyyyMMdd", message = "Date was not passed correctly.")
             // todo does not 100% work, "-" are parsed if placed at particular places
     String valueDate;
-    @CurrencyType(anyOf = {Currency.EUR}, message = "Must be any of accepted types (e.g., EUR)")
+    @CurrencyType(anyOf = {Currency.EUR}, message = "Must be any of the accepted types (e.g., EUR)")
     Currency paymentCurrency;
     @Positive
     BigDecimal feeAmount;
-    @CurrencyType(anyOf = {Currency.EUR}, message = "Must be any of accepted types (e.g., EUR)")
+    @CurrencyType(anyOf = {Currency.EUR}, message = "Must be any of the accepted types (e.g., EUR)")
     Currency feeCurrency;
 }
