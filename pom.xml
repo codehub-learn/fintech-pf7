@@ -29,8 +29,8 @@
 
 	<!-- Modules -->
 	<modules>
-		<module>java-path-spring-paymentAPI</module>
-        <module>java-path-spring-processingAgent</module>
+		<module>java-path-spring-edge</module>
+        <module>java-path-spring-integration</module>
     </modules>
 
 	<!-- Properties/Variables -->
