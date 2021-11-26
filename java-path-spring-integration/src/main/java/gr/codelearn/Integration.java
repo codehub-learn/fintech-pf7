@@ -9,6 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Integration {
 	public static void main(String[] args) {
-		SpringApplication.run(ProcessingAgent.class, args);
+		SpringApplication.run(Integration.class, args);
 	}
 }
