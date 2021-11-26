@@ -47,5 +47,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.0.1-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>gr.codelearn</groupId>
+            <artifactId>java-path-spring-commons</artifactId>
+            <version>2021.1.0</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 </project>

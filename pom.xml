@@ -31,6 +31,7 @@
 	<modules>
 		<module>java-path-spring-edge</module>
         <module>java-path-spring-integration</module>
+        <module>java-path-spring-commons</module>
     </modules>
 
 	<!-- Properties/Variables -->
