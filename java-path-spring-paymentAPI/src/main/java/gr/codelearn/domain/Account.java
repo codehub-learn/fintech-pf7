@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Entity
@@ -24,4 +25,5 @@ public class Account implements Serializable {
     private String name;
     private String iban;
     private AccountType type;
+    private BigDecimal balance;
 }
