@@ -1,6 +1,5 @@
 package gr.codelearn.service;
 
-import com.rabbitmq.client.AMQP;
 import gr.codelearn.base.AbstractLogEntity;
 import gr.codelearn.config.AMQPConfiguration;
 import gr.codelearn.domain.Account;

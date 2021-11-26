@@ -4,13 +4,11 @@ import gr.codelearn.domain.Currency;
 import gr.codelearn.validation.CurrencyType;
 import gr.codelearn.validation.DateFormatted;
 import lombok.Value;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Value
 public class PaymentDTO {

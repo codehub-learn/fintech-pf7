@@ -2,13 +2,9 @@ package gr.codelearn.validation;
 
 import gr.codelearn.domain.Currency;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.util.Arrays;
 
 
 /**

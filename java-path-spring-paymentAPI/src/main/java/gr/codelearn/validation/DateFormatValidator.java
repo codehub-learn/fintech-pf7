@@ -1,16 +1,11 @@
 package gr.codelearn.validation;
 
 import gr.codelearn.base.AbstractLogEntity;
-import gr.codelearn.domain.Currency;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Locale;
 
 public class DateFormatValidator extends AbstractLogEntity implements ConstraintValidator<DateFormatted, String> {
 
