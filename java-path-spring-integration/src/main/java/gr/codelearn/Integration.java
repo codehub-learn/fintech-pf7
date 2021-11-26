@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Spring Boot application initializer.
  */
 @SpringBootApplication
-public class PaymentAPI {
+public class Integration {
 	public static void main(String[] args) {
-		SpringApplication.run(PaymentAPI.class, args);
+		SpringApplication.run(ProcessingAgent.class, args);
 	}
 }

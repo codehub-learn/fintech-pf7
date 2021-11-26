@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Spring Boot application initializer.
  */
 @SpringBootApplication
-public class ProcessingAgent {
+public class Edge {
 	public static void main(String[] args) {
-		SpringApplication.run(ProcessingAgent.class, args);
+		SpringApplication.run(Edge.class, args);
 	}
 }
