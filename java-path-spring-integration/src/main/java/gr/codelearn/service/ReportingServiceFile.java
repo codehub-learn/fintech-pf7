@@ -1,9 +1,9 @@
 package gr.codelearn.service;
 
-import gr.codelearn.base.AbstractLogEntity;
 import gr.codelearn.domain.Account;
 import gr.codelearn.domain.Directory;
 import gr.codelearn.domain.Payment;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -14,7 +14,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.Date;
 
 @Service
-public class ReportingServiceFile extends AbstractLogEntity implements ReportingService {
+@Slf4j
+public class ReportingServiceFile implements ReportingService {
 
     @Override
     public void logPayment(Payment payment) {
@@ -29,7 +30,7 @@ public class ReportingServiceFile extends AbstractLogEntity implements Reporting
                         + " Logged at " + new Date();
                 writer.write(output);
         } catch (IOException e) {
-            logger.error("Error writing in file directory: ({}) with exception : {}", Directory.FILE_DIRECTORY.getPath(), e);
+            log.error("Error writing in file directory: ({}) with exception : {}", Directory.FILE_DIRECTORY.getPath(), e);
         }
     }
 
@@ -48,7 +49,7 @@ public class ReportingServiceFile extends AbstractLogEntity implements Reporting
             }
 
         } catch (IOException e) {
-            logger.error("Error writing in file directory: ({}) with exception : {}", Directory.FILE_DIRECTORY.getPath(), e);
+            log.error("Error writing in file directory: ({}) with exception : {}", Directory.FILE_DIRECTORY.getPath(), e);
         }
     }
 

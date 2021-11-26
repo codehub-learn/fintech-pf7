@@ -1,13 +1,14 @@
 package gr.codelearn.validation;
 
-import gr.codelearn.base.AbstractLogEntity;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateFormatValidator extends AbstractLogEntity implements ConstraintValidator<DateFormatted, String> {
+@Slf4j
+public class DateFormatValidator implements ConstraintValidator<DateFormatted, String> {
 
     private String pattern;
 
@@ -27,7 +28,7 @@ public class DateFormatValidator extends AbstractLogEntity implements Constraint
             Date date = simpleDateFormat.parse(object);
             return true;
         } catch (Exception e) {
-            logger.info("Error occured during date validation: {}", e.getMessage());
+            log.info("Error occured during date validation: {}", e.getMessage());
             return false;
         }
     }

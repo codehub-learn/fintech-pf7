@@ -1,12 +1,11 @@
 package gr.codelearn.service;
 
-import gr.codelearn.base.AbstractLogEntity;
 import gr.codelearn.domain.Account;
 import gr.codelearn.domain.Payment;
 import gr.codelearn.domain.exception.AccountBalanceIsNotSufficient;
 import gr.codelearn.repository.AccountRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -14,7 +13,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class PaymentServiceImpl extends AbstractLogEntity implements PaymentService {
+@Slf4j
+public class PaymentServiceImpl implements PaymentService {
 
     private final String queueName = "payment.queue";
 
@@ -22,12 +22,12 @@ public class PaymentServiceImpl extends AbstractLogEntity implements PaymentServ
     private ReportingService reportingService;
 
     @Override
-    @RabbitListener(queues = queueName)
+    //@RabbitListener(queues = queueName)
     public void processPayment(Payment payment) {
         // todo payment id is received as null, is this OK?
         // todo should this method validate if payment is OK again? hasn't this been validated in the API module?
         try {
-            logger.info("Payment received: {}", payment);
+            log.info("Payment received: {}", payment);
             Optional<Account> debtorOptional = accountRepository.findAccountByIban(payment.getDebtor().getIban());
             if (debtorOptional.isPresent()) {
                 Account debtor = debtorOptional.get();
@@ -55,7 +55,7 @@ public class PaymentServiceImpl extends AbstractLogEntity implements PaymentServ
             reportingService.logPayment(payment);
             reportingService.logAccounts(accountRepository.findAll());
         } catch (AccountBalanceIsNotSufficient e) {
-            logger.error("{}", e);
+            log.error("{}", e);
         }
     }
 }

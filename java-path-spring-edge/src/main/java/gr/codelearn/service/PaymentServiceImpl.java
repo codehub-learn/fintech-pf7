@@ -1,11 +1,11 @@
 package gr.codelearn.service;
 
-import gr.codelearn.base.AbstractLogEntity;
 import gr.codelearn.config.AMQPConfiguration;
 import gr.codelearn.domain.Account;
 import gr.codelearn.domain.Payment;
 import gr.codelearn.domain.exception.InvalidAccountException;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,8 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class PaymentServiceImpl extends AbstractLogEntity implements PaymentService {
+@Slf4j
+public class PaymentServiceImpl implements PaymentService {
 
     RabbitTemplate rabbitTemplate;
     AccountService accountService;
@@ -24,7 +25,7 @@ public class PaymentServiceImpl extends AbstractLogEntity implements PaymentServ
             boolean validated = validate(payment);
             if (validated) {
                 rabbitTemplate.convertAndSend(AMQPConfiguration.exchangeName, AMQPConfiguration.routingKey, payment);
-                logger.info("A payment has been queued.");
+                log.info("A payment has been queued.");
             }
         } catch (InvalidAccountException e) {
             // I do not want the caller of this method to know exactly what the error in the back-end was

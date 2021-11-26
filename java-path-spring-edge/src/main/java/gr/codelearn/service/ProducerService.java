@@ -1,9 +1,9 @@
 package gr.codelearn.service;
 
 import com.google.common.base.Strings;
-import gr.codelearn.base.AbstractLogEntity;
 import gr.codelearn.config.AMQPConfiguration;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,8 @@ import java.util.Map;
 
 @Service
 @AllArgsConstructor
-public class ProducerService extends AbstractLogEntity {
+@Slf4j
+public class ProducerService {
 
     private RabbitTemplate rabbitTemplate;
 
@@ -57,8 +58,8 @@ public class ProducerService extends AbstractLogEntity {
         if(Strings.isNullOrEmpty((String) payload.get("feeCurrency"))) {
             payload.put("feeCurrency", "");
         }
-        payload.forEach((k, v) -> logger.info("key: {}, value: {} ", k, v));
+        payload.forEach((k, v) -> log.info("key: {}, value: {} ", k, v));
         rabbitTemplate.convertAndSend(AMQPConfiguration.exchangeName, AMQPConfiguration.routingKey, payload);
-        logger.info("A payload has been sent to the queue.");
+        log.info("A payload has been sent to the queue.");
     }
 }

@@ -1,6 +1,5 @@
 package gr.codelearn.controller;
 
-import gr.codelearn.base.AbstractLogEntity;
 import gr.codelearn.domain.Account;
 import gr.codelearn.domain.Payment;
 import gr.codelearn.domain.exception.InvalidAccountException;
@@ -10,6 +9,7 @@ import gr.codelearn.service.ProducerService;
 import gr.codelearn.transfer.PaymentDTO;
 import gr.codelearn.util.DateParser;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,8 +20,9 @@ import java.util.Map;
 
 @RestController
 @AllArgsConstructor
+@Slf4j
 @RequestMapping("api")
-public class PaymentController extends AbstractLogEntity {
+public class PaymentController {
 
     private AccountService accountService;
     private PaymentService paymentService;
@@ -43,14 +44,17 @@ public class PaymentController extends AbstractLogEntity {
         }
     }
 
-    @GetMapping("accounts")
-    public List<Account> findAllAccounts() {
-        return accountService.findAll();
-    }
-
     @PostMapping("feeder")
     public boolean feederEndpoint(@RequestBody Map<String, Object> payload) {
         producerService.produceMessage(payload);
         return true;
     }
+
+    @GetMapping("accounts")
+    public List<Account> findAllAccounts() {
+        // for testing purposes
+        return accountService.findAll();
+    }
+
+
 }
