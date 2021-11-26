@@ -1,7 +1,8 @@
-package gr.codelearn.service;
+package gr.codelearn.service.impl;
 
 import gr.codelearn.domain.Account;
 import gr.codelearn.repository.AccountRepository;
+import gr.codelearn.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class AccountServiceImpl implements AccountService{
+public class AccountServiceImpl implements AccountService {
 
     private AccountRepository accountRepository;
 
@@ -25,7 +26,14 @@ public class AccountServiceImpl implements AccountService{
     }
 
     @Override
-    public void addAll(Iterable<Account> accounts) {
+    public void saveAll(Iterable<Account> accounts) {
         accountRepository.saveAll(accounts);
     }
+
+    @Override
+    public void save(Account account) {
+        accountRepository.save(account);
+    }
+
+
 }

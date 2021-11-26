@@ -10,5 +10,7 @@ public interface AccountService {
 
     Optional<Account> findByIban(String iban);
 
-    void addAll(Iterable<Account> accounts);
+    void saveAll(Iterable<Account> accounts);
+
+    void save(Account account);
 }

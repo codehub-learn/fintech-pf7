@@ -1,9 +1,7 @@
 package gr.codelearn.service;
 
-import gr.codelearn.domain.Account;
-import gr.codelearn.domain.Payment;
+import java.util.Map;
 
 public interface ReportingService {
-    void logPayment(Payment payment);
-    void logAccounts(Iterable<Account> accounts);
+    Map<String, Object> executeReports(Map<String, Object> payload);
 }

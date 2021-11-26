@@ -1,4 +1,4 @@
-package gr.codelearn.service;
+package gr.codelearn.toBeDeleted;
 
 
 import gr.codelearn.domain.Payment;

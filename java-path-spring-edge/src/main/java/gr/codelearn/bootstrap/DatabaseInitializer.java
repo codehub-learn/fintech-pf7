@@ -23,7 +23,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         log.info("Attempting to initialize application data.");
         if (accountService.findAll().isEmpty()) {
             log.info("Initialization of data is needed.");
-            accountService.addAll(
+            accountService.saveAll(
                     List.of(
                             Account.builder().name("Thomas Thomaidis").iban("GR44025635700006").type(AccountType.NORMAL).balance(new BigDecimal("1700")).build(),
                             Account.builder().name("Dimitris Iraklis").iban("GR74813235701234").type(AccountType.NORMAL).balance(new BigDecimal("1200")).build(),

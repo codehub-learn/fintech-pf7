@@ -28,7 +28,7 @@ public class DateFormatValidator implements ConstraintValidator<DateFormatted, S
             Date date = simpleDateFormat.parse(object);
             return true;
         } catch (Exception e) {
-            log.info("Error occured during date validation: {}", e.getMessage());
+            log.info("Error occured during date validation: {}.", e.getMessage());
             return false;
         }
     }
