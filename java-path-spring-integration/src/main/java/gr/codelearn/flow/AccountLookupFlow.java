@@ -1,5 +1,6 @@
 package gr.codelearn.flow;
 
+import com.google.common.base.Strings;
 import gr.codelearn.service.AccountLookupService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -29,14 +30,10 @@ public class AccountLookupFlow {
         return IntegrationFlows
                 .from(accountsLookupChannel())
                 .transform(accountLookupService::validate)
-                .<Map<String, Object>, Boolean>route(this::checkBeneficiaries, message -> message
+                .<Map<String, Object>, Boolean>route(m -> Strings.isNullOrEmpty((String) m.get("errorMessage")), message -> message
                         .channelMapping(true, balanceInquiryChannel)
                         .channelMapping(false, errorChannel)
                 )
                 .get();
-    }
-
-    public Boolean checkBeneficiaries(Map<String, Object> payload) {
-        return (Boolean) payload.get("checkBeneficiaries");
     }
 }

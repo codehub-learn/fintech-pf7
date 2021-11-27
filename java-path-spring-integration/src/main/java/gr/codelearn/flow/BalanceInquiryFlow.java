@@ -30,22 +30,10 @@ public class BalanceInquiryFlow {
         return IntegrationFlows
                 .from(balanceInquiryChannel())
                 .transform(balanceInquiryService::checkTransactionFinancially)
-                .<Map<String, Object>, Boolean>route(this::checkTransactionFinancially, message -> message
+                .<Map<Boolean, Object>, Boolean>route(m -> Strings.isNullOrEmpty((String) m.get("errorMessage")), message -> message
                         .channelMapping(true, postingChannel)
                         .channelMapping(false, errorChannel)
                 )
                 .get();
-    }
-
-    public boolean checkTransactionFinancially(Map<String, Object> payload) {
-        if (!Strings.isNullOrEmpty((String) payload.get("referralID"))) {
-            try {
-                Integer.parseInt((String) payload.get("referralID"));
-                return true;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        }
-        return false;
     }
 }
