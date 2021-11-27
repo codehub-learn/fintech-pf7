@@ -18,7 +18,6 @@ public class AccountLookupServiceImpl implements AccountLookupService {
     private AccountService accountService;
 
     public Map<String, Object> validate(Map<String, Object> payload) {
-        //Map<String, Object> payload = (Map<String, Object>) message.getPayload();
         log.info("Performing validation.");
         // validate creditor
         String creditorIBAN = (String) payload.get("creditorIBAN");
