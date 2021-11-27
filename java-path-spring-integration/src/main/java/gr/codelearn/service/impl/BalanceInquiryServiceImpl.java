@@ -39,7 +39,9 @@ public class BalanceInquiryServiceImpl implements BalanceInquiryService {
 
         // if the final balance is below 0
         if (finalBalance.compareTo(BigDecimal.ZERO) < 0) {
-            log.info("Transaction is not possible financially. Debtor does not have enough balance.");
+            String errorMessage = "Transaction is not possible financially. Debtor does not have enough balance.";
+            log.info(errorMessage);
+            payload.put("errorMessage", errorMessage);
             payload.put("referralID", null);
             return payload;
         }

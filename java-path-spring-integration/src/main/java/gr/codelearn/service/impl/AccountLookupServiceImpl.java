@@ -25,12 +25,16 @@ public class AccountLookupServiceImpl implements AccountLookupService {
         if (creditorOptional.isPresent()) {
             Account creditor = creditorOptional.get();
             if (!creditor.getName().equals(payload.get("creditorName"))) {
-                log.info("Stopping validation, creditor name from feeder is not valid.");
+                String errorMessage = "Stopping validation, creditor name from feeder is not valid.";
+                log.info(errorMessage);
+                payload.put("errorMessage", errorMessage);
                 payload.put("checkBeneficiaries", Boolean.FALSE);
                 return payload;
             }
         } else {
-            log.info("Stopping validation, creditor does not exist.");
+            String errorMessage = "Stopping validation, creditor does not exist.";
+            log.info(errorMessage);
+            payload.put("errorMessage", errorMessage);
             payload.put("checkBeneficiaries", Boolean.FALSE);
             return payload;
         }
@@ -41,12 +45,16 @@ public class AccountLookupServiceImpl implements AccountLookupService {
         if (debtorOptional.isPresent()) {
             Account debtor = debtorOptional.get();
             if (!debtor.getName().equals(payload.get("debtorName"))) {
-                log.info("Stopping validation, debtor name from feeder is not valid.");
+                String errorMessage = "Stopping validation, debtor name from feeder is not valid.";
+                log.info(errorMessage);
+                payload.put("errorMessage", errorMessage);
                 payload.put("checkBeneficiaries", Boolean.FALSE);
                 return payload;
             }
         } else {
-            log.info("Stopping validation, debtor does not exist.");
+            String errorMessage = "Stopping validation, debtor does not exist.";
+            log.info(errorMessage);
+            payload.put("errorMessage", errorMessage);
             payload.put("checkBeneficiaries", Boolean.FALSE);
             return payload;
         }

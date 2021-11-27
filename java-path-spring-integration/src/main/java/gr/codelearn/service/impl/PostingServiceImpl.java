@@ -69,18 +69,4 @@ public class PostingServiceImpl implements PostingService {
         payload.put("transactionComplete", Boolean.TRUE);
         return payload;
     }
-
-    private void subtractFeeFromDebtor(Map<String, Object> payload) {
-
-
-    }
-
-    private void addFeeToBank(Map<String, Object> payload) {
-    }
-
-    private void subtractAmountFromDebtor(Map<String, Object> payload) {
-    }
-
-    private void addAmountToCreditor(Map<String, Object> payload) {
-    }
 }

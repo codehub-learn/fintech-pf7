@@ -28,7 +28,7 @@ public class ErrorFlow {
         return IntegrationFlows
                 .from(errorChannel())
                 .log()
-                .handle(message -> log.error("Payment cancelled with reason: '{}'", ((Map<String, Object>) message.getPayload()).get("error")))
+                .handle(message -> log.error("Payment cancelled with reason: '{}'.", ((Map<String, Object>) message.getPayload()).get("errorMessage")))
                 .get();
     }
 }
