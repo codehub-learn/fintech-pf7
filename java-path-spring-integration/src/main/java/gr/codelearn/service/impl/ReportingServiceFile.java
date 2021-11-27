@@ -40,7 +40,7 @@ public class ReportingServiceFile implements ReportingService {
     private void logPayment(Map<String, Object> payload) {
         log.info("Initiating the logging payment process.");
         // not so good, creates a buffer writer each time a payment is processed
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(Directory.FILE_DIRECTORY.getPath() + "payments.txt"), StandardOpenOption.CREATE)) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(Directory.FILE_DIRECTORY.getPath() + "payments.txt"), StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
             String output = "Debtor " + payload.get("debtorName")
                     + " with IBAN " + payload.get("debtorIBAN")
                     + " paid creditor " + payload.get("creditorName")
@@ -49,6 +49,7 @@ public class ReportingServiceFile implements ReportingService {
                     + "The fee was " + payload.get("feeAmount") + "(" + payload.get("feeCurrency") + ")."
                     + " Logged at " + new Date();
             writer.write(output);
+            writer.newLine();
         } catch (IOException e) {
             log.error("Error writing in file directory: ({}) with exception : {}.", Directory.FILE_DIRECTORY.getPath(), e);
         }
