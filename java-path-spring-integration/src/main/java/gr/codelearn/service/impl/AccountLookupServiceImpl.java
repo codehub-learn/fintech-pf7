@@ -26,12 +26,12 @@ public class AccountLookupServiceImpl implements AccountLookupService {
         if (creditorOptional.isPresent()) {
             Account creditor = creditorOptional.get();
             if (!creditor.getName().equals(payload.get("creditorName"))) {
-                log.info("Stopping validation, creditor name from feeder is not valid ({},{}).", creditor.getName(), payload.get("creditorName"));
+                log.info("Stopping validation, creditor name from feeder is not valid.");
                 payload.put("checkBeneficiaries", Boolean.FALSE);
                 return payload;
             }
         } else {
-            log.info("Stopping validation, creditor does not exist ({}).", payload.get("creditorName"));
+            log.info("Stopping validation, creditor does not exist.");
             payload.put("checkBeneficiaries", Boolean.FALSE);
             return payload;
         }
@@ -42,12 +42,12 @@ public class AccountLookupServiceImpl implements AccountLookupService {
         if (debtorOptional.isPresent()) {
             Account debtor = debtorOptional.get();
             if (!debtor.getName().equals(payload.get("debtorName"))) {
-                log.info("Stopping validation, debtor name from feeder is not valid ({},{}).", debtor.getName(), payload.get("debtorName"));
+                log.info("Stopping validation, debtor name from feeder is not valid.");
                 payload.put("checkBeneficiaries", Boolean.FALSE);
                 return payload;
             }
         } else {
-            log.info("Stopping validation, debtor does not exist ({}).", payload.get("debtorName"));
+            log.info("Stopping validation, debtor does not exist.");
             payload.put("checkBeneficiaries", Boolean.FALSE);
             return payload;
         }
