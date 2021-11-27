@@ -1,5 +1,6 @@
 package gr.codelearn.service;
 
+
 import java.util.Map;
 
 public interface PostingService {

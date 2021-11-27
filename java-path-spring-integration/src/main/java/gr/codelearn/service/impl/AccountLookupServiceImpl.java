@@ -1,8 +1,8 @@
 package gr.codelearn.service.impl;
 
 import gr.codelearn.domain.Account;
+import gr.codelearn.service.AccountLookupService;
 import gr.codelearn.service.AccountService;
-import gr.codelearn.service.BeneficiaryService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,11 +13,12 @@ import java.util.Optional;
 @Service
 @Slf4j
 @AllArgsConstructor
-public class BeneficiaryServiceImpl implements BeneficiaryService {
+public class AccountLookupServiceImpl implements AccountLookupService {
 
     private AccountService accountService;
 
     public Map<String, Object> validate(Map<String, Object> payload) {
+        //Map<String, Object> payload = (Map<String, Object>) message.getPayload();
         log.info("Performing validation.");
         // validate creditor
         String creditorIBAN = (String) payload.get("creditorIBAN");

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -20,11 +21,6 @@ public class BalanceInquiryServiceImpl implements BalanceInquiryService {
 
     public Map<String, Object> checkTransactionFinancially(Map<String, Object> payload) {
         log.info("Beginning process to check if transaction is possible financially.");
-        if (!(boolean) payload.get("checkBeneficiaries")) {
-            log.info("Cannot perform check, beneficiaries were not validated successfully.");
-            payload.put("balanceInquiry", Boolean.FALSE);
-            return payload;
-        }
 
         // validate debtor
         String debtorIBAN = (String) payload.get("debtorIBAN");
@@ -44,12 +40,12 @@ public class BalanceInquiryServiceImpl implements BalanceInquiryService {
         // if the final balance is below 0
         if (finalBalance.compareTo(BigDecimal.ZERO) < 0) {
             log.info("Transaction is not possible financially. Debtor does not have enough balance.");
-            payload.put("balanceInquiry", Boolean.FALSE);
+            payload.put("referralID", null);
             return payload;
         }
 
         log.info("Process to check if transaction is possible financially has finished successfully.");
-        payload.put("balanceInquiry", Boolean.TRUE);
+        payload.put("referralID", new Random().nextInt());
         return payload;
     }
 }

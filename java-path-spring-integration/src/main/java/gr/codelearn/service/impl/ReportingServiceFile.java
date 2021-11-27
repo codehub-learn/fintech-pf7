@@ -6,6 +6,7 @@ import gr.codelearn.service.AccountService;
 import gr.codelearn.service.ReportingService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -25,13 +26,10 @@ public class ReportingServiceFile implements ReportingService {
     private AccountService accountService;
 
     @Override
-    public Map<String, Object> executeReports(Map<String, Object> payload) {
+    public Map<String, Object> executeReports(Message message) {
+        Map<String, Object> payload = (Map<String, Object>) message.getPayload();
         log.info("Executing reports.");
-        if (!(boolean) payload.get("transactionComplete")) {
-            payload.put("reportingComplete", Boolean.FALSE);
-            log.info("Cannot execute reports, transaction was not completed successfully.");
-            return payload;
-        }
+
         logPayment(payload);
         logAccounts();
         payload.put("reportingComplete", Boolean.TRUE);

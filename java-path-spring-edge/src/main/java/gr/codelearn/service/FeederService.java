@@ -7,16 +7,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Map;
 
 @Service
 @AllArgsConstructor
 @Slf4j
-public class ProducerService {
+public class FeederService {
 
     private RabbitTemplate rabbitTemplate;
 
-    public void produceMessage(Map<String, Object> payload){
+    public void feederRequest(Map<String, Object> payload) {
+        rabbitTemplate.convertAndSend(AMQPConfiguration.exchangeName, AMQPConfiguration.routingKey, validate(payload));
+        log.info("A payload has been sent to the queue.");
+    }
+
+    private Map<String, Object> validate(Map<String, Object> payload) {
         // replacing attributes with "" instead of null because we do are not required to check if string is null in all the following services
         //cid (string)
         if (Strings.isNullOrEmpty((String) payload.get("cid"))) {
@@ -40,11 +46,11 @@ public class ProducerService {
         }
         //paymentAmount (string)
         if (Strings.isNullOrEmpty((String) payload.get("paymentAmount"))) {
-            payload.put("paymentAmount", "");
+            payload.put("paymentAmount", 0);
         }
         //valueDate (string)
         if (Strings.isNullOrEmpty((String) payload.get("valueDate"))) {
-            payload.put("valueDate", "");
+            payload.put("valueDate", new Date());
         }
         //paymentCurrency (string)
         if(Strings.isNullOrEmpty((String) payload.get("paymentCurrency"))) {
@@ -52,13 +58,12 @@ public class ProducerService {
         }
         //feeAmount (string)
         if(Strings.isNullOrEmpty((String) payload.get("feeAmount"))) {
-            payload.put("feeAmount", "");
+            payload.put("feeAmount", 0);
         }
         //feeCurrency (string)
         if(Strings.isNullOrEmpty((String) payload.get("feeCurrency"))) {
             payload.put("feeCurrency", "");
         }
-        rabbitTemplate.convertAndSend(AMQPConfiguration.exchangeName, AMQPConfiguration.routingKey, payload);
-        log.info("A payload has been sent to the queue.");
+        return payload;
     }
 }

@@ -2,7 +2,7 @@ package gr.codelearn.controller;
 
 import gr.codelearn.domain.Account;
 import gr.codelearn.service.AccountService;
-import gr.codelearn.service.ProducerService;
+import gr.codelearn.service.FeederService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +17,11 @@ import java.util.Map;
 public class PaymentController {
 
     private AccountService accountService;
-    private ProducerService producerService;
+    private FeederService feederService;
 
     @PostMapping("feeder")
     public boolean feederEndpoint(@RequestBody Map<String, Object> payload) {
-        producerService.produceMessage(payload);
+        feederService.feederRequest(payload);
         return true;
     }
 
@@ -30,6 +30,4 @@ public class PaymentController {
         // for testing purposes
         return accountService.findAll();
     }
-
-
 }

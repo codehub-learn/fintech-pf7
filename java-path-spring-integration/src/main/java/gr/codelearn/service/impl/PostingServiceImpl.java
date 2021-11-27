@@ -20,11 +20,6 @@ public class PostingServiceImpl implements PostingService {
 
     public Map<String, Object> makeTransaction(Map<String, Object> payload) {
         log.info("Performing transaction.");
-        if (!(boolean) payload.get("balanceInquiry")) {
-            log.info("Cannot perform transaction, balance inquiry was not completed successfully.");
-            payload.put("transactionComplete", Boolean.FALSE);
-            return payload;
-        }
 
         // preparing fee
         String feeAmountStr = (String) payload.get("feeAmount");
